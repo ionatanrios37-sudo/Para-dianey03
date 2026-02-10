@@ -104,7 +104,8 @@ button{
 
 <body>
 
-<div id="start">Presiona aquí 💘</div>
+    
+<div id="start" onclick="startLove()">Presiona aquí 💘</div>
 
 <div id="scene">
     <div class="heart-btn" id="heart" onclick="showQuestion()">
@@ -207,9 +208,15 @@ function flower(){
     document.body.appendChild(f);
     setTimeout(()=>f.remove(),6000);
 }
-
 document.body.onclick=()=>flower();
-</script>
+</script> 
+    function startLove(){
+    document.getElementById("start").style.display = "none";
+    document.getElementById("scene").style.display = "block";
+    document.getElementById("music").play();
+}
+
+// aquí siguen las otras funciones: yes(), rain(), etc
 
 </body>
 </html>
