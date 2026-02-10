@@ -158,14 +158,29 @@ function showQuestion(){
 }
 
 function yes(){
-    heart.style.opacity=0;
+    heart.style.opacity = 0;
     setTimeout(()=>heart.style.display="none",1000);
-    tree.style.display="block";
-    message.style.display="block";
-    explore.style.display="inline-block";
 
-    for(let i=0;i<30;i++){
-        setTimeout(()=>leaf(),i*200);
+    tree.style.display = "block";
+    message.style.display = "block";
+    explore.style.display = "inline-block";
+
+    // Corazones como hojas en el árbol
+    for(let i=0;i<20;i++){
+        setTimeout(()=>{
+            let leaf = document.createElement("div");
+            leaf.className = "heart-leaf";
+            leaf.innerText = "🤍";
+            leaf.style.left = (50 + Math.random()*100 - 50) + "px";
+            leaf.style.top = (40 + Math.random()*80 - 40) + "px";
+            tree.appendChild(leaf);
+        }, i*200);
+    }
+}
+
+    }
+}
+
     }
 }
 
