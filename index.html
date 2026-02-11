@@ -57,30 +57,42 @@ button{
     to{transform:scale(1);opacity:1;}
 }
 
-.heart-leaf{
-    position:absolute;
-    font-size:22px;
-    animation:pop 0.8s ease forwards;
-}
-
-@keyframes pop{
-    from{transform:scale(0);opacity:0;}
-    to{transform:scale(1);opacity:1;}
-}
-
-.message,.final-message{
+.message{
     display:none;
     margin-top:25px;
     font-family:'Pacifico',cursive;
     font-size:20px;
     line-height:1.6;
-    max-width:90%;
+    max-width:80%;
+    position:relative;
+    z-index:2;
+}
+
+.final-message{
+    display:none;
+    margin-top:25px;
+    font-family:'Pacifico',cursive;
+    font-size:20px;
+    line-height:1.6;
+    max-width:85%;
 }
 
 .explore{
     display:none;
     background:#6d597a;
     color:white;
+}
+
+.heart-leaf{
+    position:absolute;
+    font-size:22px;
+    animation:fadeIn 1s ease forwards;
+    pointer-events:none;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:scale(0);}
+    to{opacity:1;transform:scale(1);}
 }
 
 .fall{
@@ -147,15 +159,26 @@ function yes(){
     document.getElementById("message").style.display="block";
     document.getElementById("explore").style.display="inline-block";
 
-    for(let i=0;i<20;i++){
+    const message = document.getElementById("message");
+    const rect = message.getBoundingClientRect();
+
+    for(let i=0;i<26;i++){
         setTimeout(()=>{
-            let leaf=document.createElement("div");
-            leaf.className="heart-leaf";
-            leaf.innerText="🤍";
-            leaf.style.left=(window.innerWidth/2 - 80 + Math.random()*160)+"px";
-            leaf.style.top=(window.innerHeight/2 - 60 + Math.random()*120)+"px";
-            document.body.appendChild(leaf);
-        },i*200);
+            let heart=document.createElement("div");
+            heart.className="heart-leaf";
+            heart.innerText=Math.random()>0.5?"🤍":"❤️";
+
+            let angle=Math.random()*2*Math.PI;
+            let radius=120 + Math.random()*40;
+
+            let x = rect.left + rect.width/2 + radius*Math.cos(angle);
+            let y = rect.top + rect.height/2 + radius*Math.sin(angle);
+
+            heart.style.left=x+"px";
+            heart.style.top=y+"px";
+
+            document.body.appendChild(heart);
+        },i*150);
     }
 }
 
