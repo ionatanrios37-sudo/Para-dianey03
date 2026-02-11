@@ -9,138 +9,124 @@
 <style>
 body{
     margin:0;
-    background:radial-gradient(circle,#cdb4db,#b5838d);
     height:100vh;
     overflow:hidden;
     display:flex;
     justify-content:center;
     align-items:center;
+    background:radial-gradient(circle,#cdb4db,#9d4edd);
     font-family:'Playfair Display',serif;
-}
-
-#start{
-    font-size:22px;
+    text-align:center;
     color:white;
-    background:#6d597a;
+}
+
+#start button{
     padding:15px 30px;
+    font-size:20px;
+    border:none;
     border-radius:30px;
+    background:#6d597a;
+    color:white;
     cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
 }
 
-#scene{text-align:center;display:none;color:white;}
-
-.heart-btn{
-    width:150px;height:130px;background:#9d4edd;
-    position:relative;transform:rotate(-45deg);
-    margin:auto;cursor:pointer;transition:opacity 1s;
-}
-.heart-btn::before,.heart-btn::after{
-    content:"";width:150px;height:130px;
-    background:#9d4edd;border-radius:50%;
-    position:absolute;
-}
-.heart-btn::before{top:-75px;left:0;}
-.heart-btn::after{left:75px;top:0;}
-
-.heart-text{
-    position:absolute;top:40px;left:30px;
-    transform:rotate(45deg);
-    font-family:'Pacifico',cursive;
-    font-size:42px;color:white;
-}
-
-#question{display:none;margin-top:25px;font-size:26px;}
+#scene{display:none;}
 
 button{
-    padding:12px 28px;border:none;border-radius:25px;
-    font-size:18px;margin:10px;cursor:pointer;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
     font-family:'Pacifico',cursive;
+    font-size:18px;
+    margin:10px;
+    cursor:pointer;
 }
+
 .yes{background:#f28482;color:white;}
-.no{background:#ffe5ec;}
+.alt{background:#ffe5ec;color:#6d597a;}
 
 .tree{
     display:none;
     font-size:120px;
     margin-top:20px;
-    animation:grow 3s ease forwards;
+    animation:grow 2s ease forwards;
 }
 
-}
 @keyframes grow{
     from{transform:scale(0);opacity:0;}
     to{transform:scale(1);opacity:1;}
 }
 
+.heart-leaf{
+    position:absolute;
+    font-size:22px;
+    animation:pop 0.8s ease forwards;
+}
+
+@keyframes pop{
+    from{transform:scale(0);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
 .message,.final-message{
-    display:none;margin-top:25px;
+    display:none;
+    margin-top:25px;
     font-family:'Pacifico',cursive;
-    font-size:20px;line-height:1.6;
+    font-size:20px;
+    line-height:1.6;
+    max-width:90%;
 }
 
 .explore{
     display:none;
-    background:#6d597a;color:white;
-    margin-top:20px;
+    background:#6d597a;
+    color:white;
 }
 
-.fall{position:absolute;animation:fall 6s linear infinite;}
+.fall{
+    position:absolute;
+    animation:fall 6s linear infinite;
+}
+
 @keyframes fall{
     from{transform:translateY(-50px);opacity:1;}
     to{transform:translateY(100vh);opacity:0;}
-}
-
-.leaf{
-    position:absolute;
-    animation:float 6s linear infinite;
-}
-@keyframes float{
-    from{transform:translateY(0);opacity:1;}
-    to{transform:translateY(-200px);opacity:0;}
 }
 </style>
 </head>
 
 <body>
 
-    
-<div id="start" onclick="startLove()">Presiona aquí 💘</div>
+<div id="start">
+    <button onclick="startLove()">Presiona aquí 💘</button>
+</div>
 
 <div id="scene">
-    <div class="heart-btn" id="heart" onclick="showQuestion()">
-        <div class="heart-text">ID</div>
-    </div>
+    <h2>Dianey, ¿quieres ser mi San Valentín? 🤍</h2>
+    <button class="yes" onclick="yes()">Sii, acepto con el alma 🤍</button>
+    <button class="alt" onclick="yes()">También acepto 💕</button>
+</div>
 
-    <div id="question">
-        Dianey, ¿quieres ser mi San Valentín? 🤍
-        <div>
-            <button class="yes" onclick="yes()">Sii, acepto con el alma 🤍</button>
-            <button class="no">También acepto 💕</button>
-        </div>
-    </div>
+<div class="tree" id="tree">🌳</div>
 
-    <div class="tree" id="tree">🌳</div>
+<div class="message" id="message">
+Vamos por nuestro primer Día de San Valentín juntos.<br>
+Cada día que pasamos juntos te amo más y te quiero más cerca de mí.<br>
+Gracias por todo lo bonito que estamos construyendo con tanto amor.<br><br>
+Con todo mi corazón,<br>
+Siempre tuyo,<br>
+Jonatan 🤍
+</div>
 
-    <div class="message" id="message">
-        Vamos por nuestro primer Día de San Valentín juntos.<br>
-        Cada día que pasamos juntos te amo más y te quiero más cerca de mí.<br>
-        Gracias por todo lo bonito que estamos construyendo con tanto amor.<br><br>
-        Con todo mi corazón,<br>
-        Siempre tuyo,<br>
-        Jonatan 🤍
-    </div>
+<button class="explore" id="explore" onclick="explore()">Explorar ✨</button>
 
-    <button class="explore" id="explore" onclick="explore()">Explorar ✨</button>
-
-    <div class="final-message" id="final">
-        Desde el inicio supe que contigo quería construir, cuidar y amar sin miedo;<br>
-        porque contigo no tengo dudas, solo la certeza y las ganas de seguir eligiéndote cada día.<br><br>
-        Te recuerdo que te amo con mi alma, y le doy gracias a Dios por permitirnos encontrarnos,<br>
-        por acompañar esta relación tan bonita que estamos construyendo,<br>
-        y porque sé que, tomados de Su mano, nuestro amor seguirá creciendo<br>
-        y Él nos cuidará y acompañará en cada paso, hoy y siempre.
-    </div>
+<div class="final-message" id="final">
+Desde el inicio supe que contigo quería construir, cuidar y amar sin miedo;<br>
+porque contigo no tengo dudas, solo la certeza y las ganas de seguir eligiéndote cada día.<br><br>
+Te recuerdo que te amo con mi alma, y le doy gracias a Dios por permitirnos encontrarnos,<br>
+por acompañar esta relación tan bonita que estamos construyendo,<br>
+y porque sé que, tomados de Su mano, nuestro amor seguirá creciendo<br>
+y Él nos cuidará y acompañará en cada paso, hoy y siempre.
 </div>
 
 <audio id="music" loop>
@@ -148,76 +134,48 @@ button{
 </audio>
 
 <script>
-start.onclick=()=>{
-    start.style.display="none";
-    scene.style.display="block";
-    music.play();
-}
 
-function showQuestion(){
-    question.style.display="block";
+function startLove(){
+    document.getElementById("start").style.display="none";
+    document.getElementById("scene").style.display="block";
+    document.getElementById("music").play();
 }
 
 function yes(){
-    heart.style.opacity = 0;
-    setTimeout(()=>heart.style.display="none",1000);
+    document.getElementById("scene").style.display="none";
+    document.getElementById("tree").style.display="block";
+    document.getElementById("message").style.display="block";
+    document.getElementById("explore").style.display="inline-block";
 
-    tree.style.display = "block";
-    message.style.display = "block";
-    explore.style.display = "inline-block";
-
-    // Corazones como hojas en el árbol
     for(let i=0;i<20;i++){
         setTimeout(()=>{
-            let leaf = document.createElement("div");
-            leaf.className = "heart-leaf";
-            leaf.innerText = "🤍";
-            leaf.style.left = (50 + Math.random()*100 - 50) + "px";
-            leaf.style.top = (40 + Math.random()*80 - 40) + "px";
-            tree.appendChild(leaf);
-        }, i*200);
-    }
-}
-
-    }
-}
-
+            let leaf=document.createElement("div");
+            leaf.className="heart-leaf";
+            leaf.innerText="🤍";
+            leaf.style.left=(window.innerWidth/2 - 80 + Math.random()*160)+"px";
+            leaf.style.top=(window.innerHeight/2 - 60 + Math.random()*120)+"px";
+            document.body.appendChild(leaf);
+        },i*200);
     }
 }
 
 function explore(){
-    final.style.display="block";
-}
-
-function leaf(){
-    let l=document.createElement("div");
-    l.className="leaf";
-    l.innerText="🤍";
-    l.style.left=Math.random()*innerWidth+"px";
-    l.style.top="65%";
-    document.body.appendChild(l);
-    setTimeout(()=>l.remove(),6000);
+    document.getElementById("final").style.display="block";
 }
 
 function flower(){
     let f=document.createElement("div");
     f.className="fall";
     f.innerText=["🌹","🌸","🌷","🌻"][Math.floor(Math.random()*4)];
-    f.style.left=Math.random()*innerWidth+"px";
+    f.style.left=Math.random()*window.innerWidth+"px";
     f.style.fontSize="28px";
     document.body.appendChild(f);
     setTimeout(()=>f.remove(),6000);
 }
-document.body.onclick=()=>flower();
-</script> 
-    function startLove(){
-    document.getElementById("start").style.display = "none";
-    document.getElementById("scene").style.display = "block";
-    document.getElementById("music").play();
-}
 
-// aquí siguen las otras funciones: yes(), rain(), etc
+document.body.addEventListener("click", flower);
+
+</script>
 
 </body>
 </html>
-<div id="start" onclick="startLove()">Presiona aquí 💘</div>
